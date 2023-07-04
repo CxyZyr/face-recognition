@@ -1,0 +1,57 @@
+train:
+  data:
+    data_dir: /project/share/zyr/data/train
+    ann_path: /project/share/zyr/data/train/webface_128x128_train.txt
+    dataset: {type: MiniClassDataset, test_mode: False, data_aug: False}
+    dataloader: {batch_size: 2048, num_workers: 0, shuffle: True, drop_last: True, pin_memory: True}
+  freeze:
+    epoch: 0
+    optim: {type: 'sgd', momentum: 0.9, weight_decay: 0.0004, iter_step: 2, lr_init: 0.9}
+    scheduler:
+      type: 'CosineDecayLR'
+      lr_end: 0.000001
+      warm_up_epoch: 0
+  norm:
+    epoch: 25
+    optim: {type: 'sgd', momentum: 0.9, weight_decay: 0.0004, iter_step: 1, lr_init: 0.01}
+    scheduler:
+      type: 'CosineDecayLR'
+      lr_end: 0.000001
+      warm_up_epoch: 2
+val:
+  dataset: {type: PairDataset, test_mode: True}
+  dataloader: {batch_size: 256, num_workers: 4, shuffle: False, drop_last: False, pin_memory: True}
+  database:
+    - {name: LFW, data_dir: /project/share/zyr/data/val, ann_path: /project/share/zyr/data/val/lfw_ann.txt}
+model:
+  backbone:
+    net:
+      type: unicorn_L_512
+      out_channel: 512
+      fp16: True
+  head:
+    net:
+      num_class: 10572
+      type: SphereFace2
+      magn_type: C
+      alpha: 0.7
+      r: 40
+      m: 0.4
+      t: 3.0
+      lw: 10.
+common:
+  test_first: True
+  screen_intvl: 1
+  val_intvl: 100
+  save_iters: []
+  save_cfg_name: unicorn_L_512.yml
+  save_log_dir: ./project
+  save_weight_dir: ./project
+
+
+
+
+
+
+
+

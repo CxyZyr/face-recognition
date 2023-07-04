@@ -1,0 +1,58 @@
+train:
+  data:
+    data_dir: /project/SphereFace2Data
+    ann_path: /project/SphereFace2Data/real_train_sphereface2_20230630.txt
+    dataset: {type: MiniClassDataset, test_mode: False, data_aug: True}
+    dataloader: {batch_size: 64, num_workers: 0, shuffle: True, drop_last: True, pin_memory: True}
+  freeze:
+    epoch: 5
+    optim: {type: 'sgd', momentum: 0.9, weight_decay: 0.0004, iter_step: 8, lr_init: 0.1}
+    scheduler:
+      type: 'CosineDecayLR'
+      lr_end: 0.001
+      warm_up_epoch: 0
+  norm:
+    epoch: 2
+    optim: {type: 'sgd', momentum: 0.9, weight_decay: 0.0004, iter_step: 8, lr_init: 0.001}
+    scheduler:
+      type: 'CosineDecayLR'
+      lr_end: 0.000001
+      warm_up_epoch: 0
+val:
+  dataset: {type: PairDataset, test_mode: True}
+  dataloader: {batch_size: 512, num_workers: 4, shuffle: False, drop_last: False, pin_memory: True}
+  database:
+    - {name: 1w_num2_mask, data_dir: /project/share/zyr/data/val, ann_path: /project/share/zyr/data/val/1w_num2_mask_combined_21971.txt}
+model:
+  backbone:
+    pretrained: ./project/20230612_125016/weights/backbone_134000.pth
+    net:
+      type: unicorn_256
+      out_channel: 256
+      fp16: True
+  head:
+    net:
+      num_class: 4404485
+      type: SphereFace2
+      magn_type: C
+      alpha: 0.9
+      r: 40
+      m: 0.4
+      t: 3.0
+      lw: 10.
+common:
+  test_first: True
+  screen_intvl: 100
+  val_intvl: 1000
+  save_iters: []
+  save_cfg_name: unicorn256.yml
+  save_log_dir: ./project
+  save_weight_dir: ./project
+
+
+
+
+
+
+
+
