@@ -1,0 +1,26 @@
+project:
+  model_dir: project/20230414_134552
+  model_list: ['unicorn_pretrain.pth','0522_backbone_25000.pth']
+data:
+  dataset: {type: NDataset, test_mode: True}
+  dataloader: {batch_size: 4096, num_workers: 8, shuffle: False, drop_last: False, pin_memory: True}
+  database: { name: OFD_angel , data_dir: /data/FaceAntiSpoof/data, ann_path: /data/FaceAntiSpoof/opensphere/data_txt/1_n/OFD/OFD_angel_database.txt}
+  dataval:
+    - { name: OFD_angel_right_10 , data_dir: /data/FaceAntiSpoof/data, ann_path: /data/FaceAntiSpoof/opensphere/data_txt/1_n/OFD/OFD_angel_right_10.txt}
+    - { name: OFD_angel_right_20 , data_dir: /data/FaceAntiSpoof/data, ann_path: /data/FaceAntiSpoof/opensphere/data_txt/1_n/OFD/OFD_angel_right_20.txt}
+    - { name: OFD_angel_right_30 , data_dir: /data/FaceAntiSpoof/data, ann_path: /data/FaceAntiSpoof/opensphere/data_txt/1_n/OFD/OFD_angel_right_30.txt}
+    - { name: OFD_angel_right_40 , data_dir: /data/FaceAntiSpoof/data, ann_path: /data/FaceAntiSpoof/opensphere/data_txt/1_n/OFD/OFD_angel_right_40.txt}
+    - { name: OFD_angel_right_50 , data_dir: /data/FaceAntiSpoof/data, ann_path: /data/FaceAntiSpoof/opensphere/data_txt/1_n/OFD/OFD_angel_right_50.txt}
+    - { name: OFD_angel_right_60 , data_dir: /data/FaceAntiSpoof/data, ann_path: /data/FaceAntiSpoof/opensphere/data_txt/1_n/OFD/OFD_angel_right_60.txt}
+    - { name: OFD_angel_right_70 , data_dir: /data/FaceAntiSpoof/data, ann_path: /data/FaceAntiSpoof/opensphere/data_txt/1_n/OFD/OFD_angel_right_70.txt}
+    - { name: OFD_angel_right_80 , data_dir: /data/FaceAntiSpoof/data, ann_path: /data/FaceAntiSpoof/opensphere/data_txt/1_n/OFD/OFD_angel_right_80.txt}
+    - { name: OFD_angel_right_90 , data_dir: /data/FaceAntiSpoof/data, ann_path: /data/FaceAntiSpoof/opensphere/data_txt/1_n/OFD/OFD_angel_right_90.txt}
+    - { name: OFD_angel_val , data_dir: /data/FaceAntiSpoof/data, ann_path: /data/FaceAntiSpoof/opensphere/data_txt/1_n/OFD/OFD_angel_val.txt}
+model:
+  backbone:
+    net:
+      type: unicorn_256
+      out_channel: 256
+      fp16: False
+parallel:
+  device_ids: [0,1,2,3]

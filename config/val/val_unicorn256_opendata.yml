@@ -1,0 +1,27 @@
+project:
+  model_dir: project/20230414_134552
+  model_list: ['20230416_231339_backbone_213371.pth','20230417_102306_backbone_248933.pth','20230417_212932_backbone_284495.pth']
+data:
+  dataset: {type: PairDataset, test_mode: True}
+  dataloader: {batch_size: 8, num_workers: 4, shuffle: False, drop_last: False, pin_memory: True}
+  database:
+    - {name: LFW, data_dir: /project/share/zyr/data/val,ann_path: /project/share/zyr/data/val/lfw_ann.txt}
+    - {name: AgeDB_30, data_dir: /project/share/zyr/data/val,ann_path: /project/share/zyr/data/val/agedb_30_ann.txt}
+    - {name: CA-LFW, data_dir: /project/share/zyr/data/val,ann_path: /project/share/zyr/data/val/calfw_ann.txt}
+    - {name: CP-LFW, data_dir: /project/share/zyr/data/val,ann_path: /project/share/zyr/data/val/cplfw_ann.txt}
+    - {name: Combined, data_dir: /project/share/zyr/data/val,ann_path: /project/share/zyr/data/val/combined_ann.txt}
+model:
+  backbone:
+    net:
+      type: unicorn_256
+      out_channel: 256
+      fp16: False
+parallel:
+  device_ids: [0,1]
+
+
+
+
+
+
+

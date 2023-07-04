@@ -1,0 +1,17 @@
+project:
+  model_dir: project/20230414_134552
+  model_list: ['unicorn_pretrain.pth']
+data:
+  dataset: {type: NDataset, test_mode: True}
+  dataloader: {batch_size: 2000, num_workers: 8, shuffle: False, drop_last: False, pin_memory: True}
+  database: { name: cc_10w , data_dir: /data/FaceAntiSpoof/data, ann_path: /data/FaceAntiSpoof/opensphere/data_txt/1_n/cc_10w/cc_10w_database.txt} #底库图像
+  dataval:
+    - { name: cc_10w , data_dir: /data/FaceAntiSpoof/data, ann_path: /data/FaceAntiSpoof/opensphere/data_txt/1_n/cc_10w/cc_10w_val.txt} #待搜索/测试图像
+model:
+  backbone:
+    net:
+      type: unicorn_256
+      out_channel: 256
+      fp16: False
+parallel:
+  device_ids: [0,1,2,3,4,5,6,7]

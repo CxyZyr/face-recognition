@@ -1,0 +1,23 @@
+project:
+  model_dir: ./weights
+  model_list: ['0522_backbone_25000.pth']
+data:
+  dataset: {type: PairDataset, test_mode: True}
+  dataloader: {batch_size: 4096, num_workers: 4, shuffle: False, drop_last: False, pin_memory: True}
+  database:
+    - {name: tmp, data_dir: /project/share/zyr/data/val, ann_path: /project/share/zyr/data/val/1w_num2_for_sphereface_mask2_combined_47624.txt}
+model:
+  backbone:
+    net:
+      type: unicorn_256
+      out_channel: 256
+      fp16: False
+parallel:
+  device_ids: [0]
+
+
+
+
+
+
+

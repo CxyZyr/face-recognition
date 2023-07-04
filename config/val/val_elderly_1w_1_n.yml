@@ -1,0 +1,17 @@
+project:
+  model_dir: project/20230414_134552
+  model_list: ['unicorn_pretrain.pth','0522_backbone_25000.pth']
+data:
+  dataset: {type: NDataset, test_mode: True}
+  dataloader: {batch_size: 6000, num_workers: 8, shuffle: False, drop_last: False, pin_memory: True}
+  database: { name: elderly_1w , data_dir: /data/FaceAntiSpoof/data, ann_path: /data/FaceAntiSpoof/opensphere/data_txt/1_n/elderly_1w/elderly_1w_database.txt}
+  dataval:
+    - { name: elderly_1w , data_dir: /data/FaceAntiSpoof/data, ann_path: /data/FaceAntiSpoof/opensphere/data_txt/1_n/elderly_1w/elderly_1w_val.txt}
+model:
+  backbone:
+    net:
+      type: unicorn_256
+      out_channel: 256
+      fp16: False
+parallel:
+  device_ids: [0,1,2,3]
