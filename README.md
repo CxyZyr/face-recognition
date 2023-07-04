@@ -1,6 +1,6 @@
 # Introduction
 ************************************************************
-**Glasssix-SphereFace2** project aims to train better feature extraction models or explore new hypersphere face recognition frameworks based on the **SphereFace2** framework. We made some modifications based on the opensphere source code to better adapt to existing environments and reduce device requirements. In this framework, the loss function and other parts (such as network structure, optimizer, data augmentation) are separated, which makes it easy to compare the effects of different loss functions.
+this project aims to train better feature extraction models or explore new hypersphere face recognition frameworks based on the **SphereFace2** framework. We made some modifications based on the opensphere source code to better adapt to existing environments and reduce device requirements. In this framework, the loss function and other parts (such as network structure, optimizer, data augmentation) are separated, which makes it easy to compare the effects of different loss functions.
 
 ### Supported Projects
 * https://wyliu.com/papers/LiuCVPR17v3.pdf
