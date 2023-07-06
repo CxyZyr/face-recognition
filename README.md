@@ -34,7 +34,7 @@ Additionally, we provide different code for conducting face recognition tests in
 result is saved in the folder as one txt named by the job starting time.
 * To test 1:1 ,simply run
 ```
-CUDA_VISIBLE_DEVICES=0,1 python test.py --config config/val/val_unicorn256_1800.yml
+CUDA_VISIBLE_DEVICES=0,1 python test.py --config config/val/val_unicorn256.yml
 ```
 * To test 1:N ,simply run
 ```
